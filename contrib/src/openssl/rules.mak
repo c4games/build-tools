@@ -1,5 +1,5 @@
 # OPENSSL
-OPENSSL_VERSION := 1.1.0c
+OPENSSL_VERSION := 1.1.1b
 OPENSSL_URL := https://www.openssl.org/source/openssl-$(OPENSSL_VERSION).tar.gz
 
 OPENSSL_EXTRA_CONFIG_1=no-shared no-unit-test
@@ -97,7 +97,7 @@ endif
 
 CUR_MAKEFILE_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-# Set reference to custom configuration (OpenSSL 1.1.0)
+# Set reference to custom configuration (OpenSSL 1.1.1b)
 # See: https://github.com/openssl/openssl/commit/afce395cba521e395e6eecdaf9589105f61e4411
 export OPENSSL_LOCAL_CONFIG_DIR=${CUR_MAKEFILE_DIR}/config
 
@@ -137,9 +137,7 @@ $(TARBALLS)/openssl-$(OPENSSL_VERSION).tar.gz:
 
 openssl: openssl-$(OPENSSL_VERSION).tar.gz .sum-openssl
 	$(UNPACK)
-ifdef HAVE_IOS
-	$(APPLY) $(SRC)/openssl/ios-armv7-crash.patch
-endif
+	
 	$(MOVE)
 
 .openssl: openssl

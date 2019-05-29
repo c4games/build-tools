@@ -3,7 +3,7 @@ OPENSSL_VERSION := 1.1.1b
 OPENSSL_URL := https://www.openssl.org/source/openssl-$(OPENSSL_VERSION).tar.gz
 
 OPENSSL_EXTRA_CONFIG_1=no-shared no-unit-test
-OPENSSL_EXTRA_CONFIG_2=
+OPENSSL_EXTRA_CONFIG_2i=
 
 ifdef HAVE_MACOSX
 ifeq ($(MY_TARGET_ARCH),x86_64)
@@ -121,7 +121,7 @@ endif
 
 CUR_MAKEFILE_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-# Set reference to custom configuration (OpenSSL 1.1.0)
+# Set reference to custom configuration (OpenSSL 1.1.b)
 # See: https://github.com/openssl/openssl/commit/afce395cba521e395e6eecdaf9589105f61e4411
 export OPENSSL_LOCAL_CONFIG_DIR=${CUR_MAKEFILE_DIR}/config
 
@@ -140,7 +140,7 @@ openssl: openssl-$(OPENSSL_VERSION).tar.gz .sum-openssl
 	$(MOVE)
 
 .openssl: openssl
-	cd $< && ./Configure $(OPENSSL_CONFIG_VARS) --prefix=$(PREFIX) ${OPENSSL_ARCH} $(OPENSSL_EXTRA_CONFIG_1) $(OPENSSL_EXTRA_CONFIG_2)
+	cd $< && ./Configure $(OPENSSL_CONFIG_VARS) --prefix=$(PREFIX) ${OPENSSL_ARCH} $(OPENSSL_EXTRA_CONFIG_1) $(OPENSSL_EXTRA_CONFIG_2) no-threads
 ifdef HAVE_IOS
 	cd $< && perl -i -pe "s|^CFLAGS=(.*) -DNDEBUG (.*)-O3|CFLAGS=\\1 \\2 ${OPTIM} ${ENABLE_BITCODE}|g" Makefile
 	cd $< && perl -i -pe "s|^CFLAGS_Q=(.*) -DNDEBUG (.*)|CFLAGS_Q=\\1 \\2 ${OPTIM} ${ENABLE_BITCODE}|g" Makefile

@@ -11,6 +11,7 @@ This repository is needed for cocos2d-x developers and/or people who want to:
 
 
 **Note:**
+- Build zlib-1.2.11 only works on android-ndk-r14b, r16+ not work
 
 - We use MacOSX to build all the static libraries for iOS, Android, Mac and Tizen.
 

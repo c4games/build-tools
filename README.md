@@ -53,11 +53,7 @@ If you have an old version autoconf installed, you may need uninstall it first, 
 - If you want to use these scripts, you should instll *autoconf*:
 
 ```
-sudo apt-get install autoconf
-sudo apt-get install automake
-sudo apt-get install cmake
-sudo apt-get install libtool
-sudo apt-get install git
+sudo apt-get install autoconf automake cmake libtool git
 ```
 
 - If you want to build 32-bit libs on a 64-bit linux system, you should install *gcc-multilib*
